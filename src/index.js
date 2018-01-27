@@ -6,11 +6,12 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
-import promise from 'redux-promise';
+import reduxThunk from 'redux-thunk';
 import Signin from './components/auth/signin';
 import Header from './components/header';
+import Feature from './components/feature';
 
-const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
@@ -18,6 +19,7 @@ ReactDOM.render(
       <div>
         <Header />
         <Switch>
+          <Route path="/feature" component={Feature} />
           <Route path="/signin" component={Signin} />
           <Route exact path="/" component={App} />
         </Switch>
