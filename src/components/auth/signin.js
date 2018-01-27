@@ -30,12 +30,12 @@ class Signin extends Component {
     return(
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
         <Field
-          label="Email"
+          label="Email:"
           name="email"
           component={this.renderField}
         />
         <Field
-          label="Password"
+          label="Password:"
           name="password"
           component={this.renderField}
         />
