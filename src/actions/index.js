@@ -25,3 +25,4 @@ export function authError(error) {
     payload: error
   }
 }
+

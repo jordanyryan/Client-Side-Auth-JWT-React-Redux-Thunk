@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 
 class Header extends Component {
+
+  
+
   render() {
     return(
-      <nav className="navbar navbar-light">
-        <ul className="nav navbar-nav">
-          <Link to="/">Home</Link>
-          <Link to="/signin">Sign In</Link>
-        </ul>
+      <nav className="navbar navbar-light justify-content-start navi">
+        <Link className="navi-item" to="/">Home</Link>
+        <Link className="navi-item" to="/signin">Sign In</Link>
       </nav>
     )
   }
 }
 
-export default Header;
+function mapStateToProps({auth}) {
+  return {authenticated: auth.authenticated};
+}
+
+export default connect(mapStateToProps)(Header);
