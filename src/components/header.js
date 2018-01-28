@@ -13,7 +13,7 @@ class Header extends Component {
       ]
       
     }
-    return <Link onClick={} className="navi-item" to="/signout">Sign Out</Link>;
+    return <Link className="navi-item" to="/signout">Sign Out</Link>;
   }
 
   onClickSignOut() {
