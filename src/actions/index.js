@@ -10,17 +10,18 @@ export function signinUser({email, password}, callback) {
     axios.post(`${ROOT_URL}/signin`, {email, password})
     .then( (response) => {
       dispatch({type: types.AUTH_USER}); //  - update state to indicate user is authenticated
+      localStorage.setItem('token', response.data.token); //  - save JWT token
       callback() //  - redirect to protected route / or wherever else
     })
-    .catch(() => {
+    .catch((err) => {
+      dispatch(authError('Email/Password incorrect'));
+    }); 
+  }
+}
 
-    });
-    
-    //  - save JWT token
-    
-
-    // If request is bad
-    //  - show an error to user
-
+export function authError(error) {
+  return {
+    type: types.AUTH_ERROR,
+    payload: error
   }
 }

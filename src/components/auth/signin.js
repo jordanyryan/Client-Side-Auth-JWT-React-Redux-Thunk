@@ -13,7 +13,7 @@ class Signin extends Component {
         <label>{field.label}</label>
         <input
           className="form-control"
-          type="text"
+          type={field.type}
           {...field.input}
         />
         <div className="text-help">
@@ -21,6 +21,16 @@ class Signin extends Component {
         </div>
       </div>
     )
+  }
+
+  renderAlert() {
+    if (this.props.error) {
+      return (
+        <div className="alert alert-danger">
+          <strong>Oops!</strong> {this.props.error}
+        </div>
+      );
+    }
   }
 
   handleFormSubmit({email, password}) {
@@ -31,18 +41,23 @@ class Signin extends Component {
 
   render() {
     const {handleSubmit} = this.props;
+
     return(
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+
         <Field
           label="Email:"
           name="email"
+          type="text"
           component={this.renderField}
         />
         <Field
           label="Password:"
           name="password"
           component={this.renderField}
+          type="password"
         />
+        {this.renderAlert()}
         <button type="submit" className="btn btn-primary">Sign in</button>
       </form>
     )
@@ -66,11 +81,15 @@ function validate(values) {
   return errors;
 }
 
+function mapStateToProps({auth}) {
+  return {error: auth.error};
+}
+
 export default reduxForm({
   validate,
   form: 'signin'
 })(
-  connect(null, actions)(Signin)
+  connect(mapStateToProps, actions)(Signin)
 )
 
 
