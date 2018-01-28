@@ -13,12 +13,16 @@ class Header extends Component {
       ]
       
     }
-    return <Link className="navi-item" to="/signout">Sign Out</Link>;
+    return <Link onClick={} className="navi-item" to="/signout">Sign Out</Link>;
+  }
+
+  onClickSignOut() {
+    
   }
 
   render() {
     return(
-      <nav className="navbar navbar-light justify-content-start navi">
+      <nav className="navbar navbar-light navi">
         <Link className="navi-item" to="/">Home</Link>
         {this.renderLinks()}
       </nav>
