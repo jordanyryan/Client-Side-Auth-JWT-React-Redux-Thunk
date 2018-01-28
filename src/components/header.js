@@ -5,13 +5,22 @@ import { connect } from 'react-redux';
 
 class Header extends Component {
 
-  
+  renderLinks() {
+    if (!this.props.authenticated) {
+      return [
+        <Link key={1} className="navi-item" to="/signin">Sign In</Link>,
+        <Link key={2} className="navi-item" to="/signup">Sign Up</Link>
+      ]
+      
+    }
+    return <Link className="navi-item" to="/signout">Sign Out</Link>;
+  }
 
   render() {
     return(
       <nav className="navbar navbar-light justify-content-start navi">
         <Link className="navi-item" to="/">Home</Link>
-        <Link className="navi-item" to="/signin">Sign In</Link>
+        {this.renderLinks()}
       </nav>
     )
   }
