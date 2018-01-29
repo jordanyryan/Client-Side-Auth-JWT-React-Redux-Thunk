@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {AUTH_USER, AUTH_ERROR, UNAUTH_USER} from './types';
+import {AUTH_USER, AUTH_ERROR, UNAUTH_USER, FETCH_MESSAGE} from './types';
 
 // API Server where users are handled
 const ROOT_URL = "http://localhost:3090";
@@ -46,3 +46,14 @@ export function authError(error) {
   }
 }
 
+
+export function fetchMessage() {
+  const request = axios.get(ROOT_URL, {
+      headers: {authorization: localStorage.getItem('token')}
+    })
+
+    return {
+      type: FETCH_MESSAGE,
+      payload: request
+    }
+}

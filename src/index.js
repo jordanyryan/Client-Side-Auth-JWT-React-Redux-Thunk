@@ -7,6 +7,7 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
 import reduxThunk from 'redux-thunk';
+import promise from 'redux-promise';
 import {AUTH_USER} from './actions/types';
 
 import Signin from './components/auth/signin';
@@ -18,7 +19,7 @@ import requireAuth from './components/auth/require_authentication'; // higher or
 import requireUnauth from './components/auth/redirect_auth';
 
 
-const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+const createStoreWithMiddleware = applyMiddleware(reduxThunk, promise)(createStore);
 const store = createStoreWithMiddleware(reducers);
 
 const token = localStorage.getItem('token');
